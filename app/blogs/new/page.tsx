@@ -1,27 +1,41 @@
+"use client"
+
+import { useActionState } from "react"
 import { createBlog } from "../../actions/blogs"
 
 const NewBlog = () => {
+  const [state, formAction] = useActionState(createBlog, { errors: {} })
+
   return (
     <div>
       <h2>Create a new blog</h2>
-      <form action={createBlog}>
+      <form action={formAction}>
         <div>
           <label>
             Title
-            <input type="text" name="title" required />
+            <input type="text" name="title" />
           </label>
+          {state.errors.title && (
+            <p style={{ color: "red" }}>{state.errors.title}</p>
+          )}
         </div>
         <div>
           <label>
             Author
-            <input type="text" name="author" required />
+            <input type="text" name="author" />
           </label>
+          {state.errors.author && (
+            <p style={{ color: "red" }}>{state.errors.author}</p>
+          )}
         </div>
         <div>
           <label>
             URL
-            <input type="text" name="url" required />
+            <input type="text" name="url" />
           </label>
+          {state.errors.url && (
+            <p style={{ color: "red" }}>{state.errors.url}</p>
+          )}
         </div>
         <button type="submit">Create</button>
       </form>

@@ -1,12 +1,11 @@
+import Homepage from "./homepage.mdx"
+
 const Home = () => {
   return (
-    <div>
-      <h2>blog app</h2>
-      An app for{" "}
-      <a href="https://courses.mooc.fi/org/uh-cs/courses/full-stack-open-nextjs">
-        Full Stack Open Next.js
-      </a>
+    <div className="markdown max-w-2xl mx-auto p-6">
+      <Homepage />
     </div>
   )
 }
+
 export default Home

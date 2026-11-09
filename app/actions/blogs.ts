@@ -11,8 +11,14 @@ type BlogErrors = {
   url?: string
 }
 
+type BlogValues = {
+  title: string
+  author: string
+  url: string
+}
+
 export const createBlog = async (
-  prevState: { errors: BlogErrors },
+  prevState: { errors: BlogErrors; values?: BlogValues },
   formData: FormData,
 ) => {
   const session = await auth()
@@ -36,7 +42,7 @@ export const createBlog = async (
   }
 
   if (Object.keys(errors).length > 0) {
-    return { errors }
+    return { errors, values: { title, author, url } }
   }
 
   await addBlog(title, author, url)

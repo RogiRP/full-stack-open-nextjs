@@ -16,3 +16,9 @@ export const getUserWithBlogs = async (username: string) => {
 export const setToken = async (id: number, token: string) => {
   await db.update(users).set({ token }).where(eq(users.id, id))
 }
+
+export const getUserByToken = async (token: string) => {
+  return db.query.users.findFirst({
+    where: eq(users.token, token),
+  })
+}

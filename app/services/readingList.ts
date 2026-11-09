@@ -19,3 +19,10 @@ export const getUserWithReadingList = async (id: number) => {
     with: { readingList: { with: { blog: true } } },
   })
 }
+
+export const markAsRead = async (id: number, userId: number) => {
+  await db
+    .update(readingList)
+    .set({ read: true })
+    .where(and(eq(readingList.id, id), eq(readingList.userId, userId)))
+}

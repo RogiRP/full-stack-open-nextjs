@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache"
 import { auth } from "@/auth"
 import { addBlog, addLike } from "../services/blogs"
 import { getCurrentUser } from "../services/session"
-import { addToReadingList } from "../services/readingList"
+import { addToReadingList, markAsRead } from "../services/readingList"
 
 type BlogErrors = {
   title?: string
@@ -73,5 +73,16 @@ export const addBlogToReadingList = async (formData: FormData) => {
   const blogId = Number(formData.get("blogId"))
   await addToReadingList(user.id, blogId)
   revalidatePath(`/blogs/${blogId}`)
+  revalidatePath("/me")
+}
+
+export const markReadingAsRead = async (formData: FormData) => {
+  const user = await getCurrentUser()
+  if (!user) {
+    redirect("/login")
+  }
+
+  const id = Number(formData.get("id"))
+  await markAsRead(id, user.id)
   revalidatePath("/me")
 }

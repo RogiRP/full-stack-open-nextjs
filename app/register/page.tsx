@@ -24,7 +24,9 @@ export default function RegisterPage() {
             <input type="text" name="username" required />
           </label>
           {state.errors.username && (
-            <p style={{ color: "red" }}>{state.errors.username}</p>
+            <p data-testid="username-error" style={{ color: "red" }}>
+              {state.errors.username}
+            </p>
           )}
         </div>
         <div>
@@ -39,7 +41,9 @@ export default function RegisterPage() {
             <input type="password" name="password" required />
           </label>
           {state.errors.password && (
-            <p style={{ color: "red" }}>{state.errors.password}</p>
+            <p data-testid="password-error" style={{ color: "red" }}>
+              {state.errors.password}
+            </p>
           )}
         </div>
         <div>
@@ -48,10 +52,14 @@ export default function RegisterPage() {
             <input type="password" name="passwordConfirm" required />
           </label>
           {state.errors.passwordConfirm && (
-            <p style={{ color: "red" }}>{state.errors.passwordConfirm}</p>
+            <p data-testid="passwordConfirm-error" style={{ color: "red" }}>
+              {state.errors.passwordConfirm}
+            </p>
           )}
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" data-testid="register-button">
+          Register
+        </button>
       </form>
     </div>
   )

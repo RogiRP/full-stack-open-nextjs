@@ -19,9 +19,13 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     !(await isInReadingList(user.id, blog.id))
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-2">{blog.title}</h2>
-      <p className="text-gray-600 mb-2">Author: {blog.author}</p>
+    <div data-testid="blog-detail" className="max-w-2xl mx-auto p-6">
+      <h2 data-testid="blog-title" className="text-2xl font-bold mb-2">
+        {blog.title}
+      </h2>
+      <p data-testid="blog-author" className="text-gray-600 mb-2">
+        Author: {blog.author}
+      </p>
       <p className="mb-2">
         URL:{" "}
         <a href={blog.url} className="text-blue-600 hover:underline">
@@ -45,6 +49,7 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
           <input type="hidden" name="blogId" value={blog.id} />
           <button
             type="submit"
+            data-testid="add-to-reading-list-button"
             className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
           >
             add to reading list

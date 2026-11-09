@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation"
 import { getBlogById } from "../../services/blogs"
-import { likeBlog } from "../../actions/blogs"
+import { likeBlog, addBlogToReadingList } from "../../actions/blogs"
+import { getCurrentUser } from "../../services/session"
+import { isInReadingList } from "../../services/readingList"
 
 const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
@@ -9,6 +11,12 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   if (!blog) {
     notFound()
   }
+
+  const user = await getCurrentUser()
+  const canAddToReadingList =
+    user &&
+    blog.userId !== user.id &&
+    !(await isInReadingList(user.id, blog.id))
 
   return (
     <div className="max-w-2xl mx-auto p-6">
@@ -32,6 +40,17 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
           </button>
         </form>
       </div>
+      {canAddToReadingList && (
+        <form action={addBlogToReadingList} className="mt-4">
+          <input type="hidden" name="blogId" value={blog.id} />
+          <button
+            type="submit"
+            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          >
+            add to reading list
+          </button>
+        </form>
+      )}
     </div>
   )
 }

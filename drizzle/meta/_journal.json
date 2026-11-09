@@ -15,6 +15,13 @@
       "when": 1794195407505,
       "tag": "0001_tearful_diamondback",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794195501440,
+      "tag": "0002_public_microbe",
+      "breakpoints": true
     }
   ]
 }

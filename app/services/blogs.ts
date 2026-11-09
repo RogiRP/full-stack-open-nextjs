@@ -22,6 +22,12 @@ const blogs = [
   },
 ]
 
+let nextId = 4
+
 export const getBlogs = () => {
   return blogs
+}
+
+export const addBlog = (title: string, author: string, url: string) => {
+  blogs.push({ id: nextId++, title, author, url, likes: 0 })
 }

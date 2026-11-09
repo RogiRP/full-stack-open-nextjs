@@ -18,7 +18,7 @@ type BlogValues = {
 }
 
 export const createBlog = async (
-  prevState: { errors: BlogErrors; values?: BlogValues },
+  prevState: { errors: BlogErrors; values?: BlogValues; success?: boolean },
   formData: FormData,
 ) => {
   const session = await auth()
@@ -42,13 +42,17 @@ export const createBlog = async (
   }
 
   if (Object.keys(errors).length > 0) {
-    return { errors, values: { title, author, url } }
+    return { errors, values: { title, author, url }, success: false }
   }
 
   await addBlog(title, author, url)
 
   revalidatePath("/blogs")
-  redirect("/blogs")
+  return {
+    errors: {},
+    values: { title: "", author: "", url: "" },
+    success: true,
+  }
 }
 
 export const likeBlog = async (formData: FormData) => {

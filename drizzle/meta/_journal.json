@@ -8,6 +8,13 @@
       "when": 1794195285590,
       "tag": "0000_curved_black_tom",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794195407505,
+      "tag": "0001_tearful_diamondback",
+      "breakpoints": true
     }
   ]
 }

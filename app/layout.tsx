@@ -11,12 +11,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-screen bg-background text-foreground">
         <AuthSessionProvider>
           <NotificationProvider>
             <NavBar />
             <Notification />
-            {children}
+            <main>{children}</main>
           </NotificationProvider>
         </AuthSessionProvider>
       </body>
